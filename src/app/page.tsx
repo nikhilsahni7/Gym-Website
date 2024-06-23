@@ -1,8 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { AuthForm } from "@/components/Auth-form";
 import React from "react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return <div>Home page</div>;
+const page = async () => {
+  const session = await auth();
+
+  if (session?.user && session) {
+    redirect("/home");
+  }
+  return <AuthForm />;
 };
 
 export default page;
