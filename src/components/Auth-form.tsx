@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { LoginSchema, RegisterSchema } from "@/schemas";
-import { useTransition, useState, useEffect } from "react";
+import { useTransition, useState } from "react";
 import { login } from "@/app/actions/login";
 import { register } from "@/app/actions/register";
 import {
@@ -34,9 +34,6 @@ import {
   FaGoogle,
   FaRunning,
   FaHeartbeat,
-  FaFingerprint,
-  FaMoon,
-  FaSun,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -45,17 +42,7 @@ export const AuthForm = () => {
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
   const [activeTab, setActiveTab] = useState("login");
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setIsDarkMode(prefersDark);
-  }, []);
-
-  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const loginForm = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -96,46 +83,17 @@ export const AuthForm = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${
-        isDarkMode
-          ? "bg-gradient-to-br from-gray-900 to-black"
-          : "bg-gradient-to-br from-green-50 to-green-100"
-      }`}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-green-50 to-green-100">
       <div className="w-full max-w-md relative">
-        <button
-          onClick={toggleDarkMode}
-          className="absolute top-4 right-4 p-2 rounded-full bg-opacity-20 backdrop-filter backdrop-blur-lg"
-        >
-          {isDarkMode ? (
-            <FaSun className="text-yellow-400" />
-          ) : (
-            <FaMoon className="text-gray-700" />
-          )}
-        </button>
-
         <motion.div
           className="absolute -top-24 left-1/2 transform -translate-x-1/2 flex space-x-4"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <FaDumbbell
-            className={`text-5xl ${
-              isDarkMode ? "text-green-400" : "text-green-600"
-            }`}
-          />
-          <FaRunning
-            className={`text-5xl ${
-              isDarkMode ? "text-white" : "text-gray-800"
-            }`}
-          />
-          <FaHeartbeat
-            className={`text-5xl ${
-              isDarkMode ? "text-green-400" : "text-green-600"
-            }`}
-          />
+          <FaDumbbell className="text-5xl text-green-600" />
+          <FaRunning className="text-5xl text-gray-800" />
+          <FaHeartbeat className="text-5xl text-green-600" />
         </motion.div>
 
         <motion.div
@@ -143,20 +101,8 @@ export const AuthForm = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <Card
-            className={`w-full backdrop-filter backdrop-blur-lg bg-opacity-30 shadow-2xl border overflow-hidden ${
-              isDarkMode
-                ? "bg-gray-800/50 border-green-700"
-                : "bg-white/50 border-green-200"
-            }`}
-          >
-            <CardHeader
-              className={`space-y-1 ${
-                isDarkMode
-                  ? "bg-gradient-to-r from-green-800 to-green-900"
-                  : "bg-gradient-to-r from-green-400 to-green-500"
-              } p-6`}
-            >
+          <Card className="w-full backdrop-filter backdrop-blur-lg bg-opacity-30 shadow-2xl border overflow-hidden bg-white/50 border-green-200">
+            <CardHeader className="space-y-1 bg-gradient-to-r from-green-400 to-green-500 p-6">
               <CardTitle className="text-3xl font-bold text-center text-white">
                 FitnessFusion
               </CardTitle>
@@ -175,16 +121,8 @@ export const AuthForm = () => {
                     value="login"
                     className={`text-lg transition-all duration-300 ${
                       activeTab === "login"
-                        ? `${
-                            isDarkMode
-                              ? "bg-green-500 text-black"
-                              : "bg-green-600 text-white"
-                          }`
-                        : `${
-                            isDarkMode
-                              ? "bg-gray-700 text-white"
-                              : "bg-gray-200 text-gray-700"
-                          }`
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-200 text-gray-700"
                     }`}
                   >
                     Login
@@ -193,16 +131,8 @@ export const AuthForm = () => {
                     value="register"
                     className={`text-lg transition-all duration-300 ${
                       activeTab === "register"
-                        ? `${
-                            isDarkMode
-                              ? "bg-green-500 text-black"
-                              : "bg-green-600 text-white"
-                          }`
-                        : `${
-                            isDarkMode
-                              ? "bg-gray-700 text-white"
-                              : "bg-gray-200 text-gray-700"
-                          }`
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-200 text-gray-700"
                     }`}
                   >
                     Register
@@ -227,11 +157,7 @@ export const AuthForm = () => {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel
-                                  className={
-                                    isDarkMode ? "text-white" : "text-gray-700"
-                                  }
-                                >
+                                <FormLabel className="text-gray-700">
                                   Email
                                 </FormLabel>
                                 <FormControl>
@@ -239,11 +165,7 @@ export const AuthForm = () => {
                                     <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
                                     <Input
                                       {...field}
-                                      className={`${
-                                        isDarkMode
-                                          ? "bg-gray-700/50 border-green-600 text-white"
-                                          : "bg-white/50 border-green-300 text-gray-900"
-                                      } pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50`}
+                                      className="bg-white/50 border-green-300 text-gray-900 pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50"
                                     />
                                   </div>
                                 </FormControl>
@@ -256,11 +178,7 @@ export const AuthForm = () => {
                             name="password"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel
-                                  className={
-                                    isDarkMode ? "text-white" : "text-gray-700"
-                                  }
-                                >
+                                <FormLabel className="text-gray-700">
                                   Password
                                 </FormLabel>
                                 <FormControl>
@@ -269,11 +187,7 @@ export const AuthForm = () => {
                                     <Input
                                       {...field}
                                       type="password"
-                                      className={`${
-                                        isDarkMode
-                                          ? "bg-gray-700/50 border-green-600 text-white"
-                                          : "bg-white/50 border-green-300 text-gray-900"
-                                      } pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50`}
+                                      className="bg-white/50 border-green-300 text-gray-900 pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50"
                                     />
                                   </div>
                                 </FormControl>
@@ -293,11 +207,7 @@ export const AuthForm = () => {
                           <Button
                             disabled={isPending}
                             type="submit"
-                            className={`w-full ${
-                              isDarkMode
-                                ? "bg-green-500 hover:bg-green-600"
-                                : "bg-green-600 hover:bg-green-700"
-                            } text-white transition-all duration-300 transform hover:scale-105`}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white transition-all duration-300 transform hover:scale-105"
                           >
                             Sign in
                           </Button>
@@ -307,11 +217,7 @@ export const AuthForm = () => {
                         <form action={doSocialLogin}>
                           <Button
                             variant="outline"
-                            className={`w-full flex items-center justify-center transition-all duration-300 transform hover:scale-105 ${
-                              isDarkMode
-                                ? "text-black border-green-500"
-                                : "text-gray-800 border-green-600"
-                            }`}
+                            className="w-full flex items-center justify-center transition-all duration-300 transform hover:scale-105 text-gray-800 border-green-600"
                             type="submit"
                             name="action"
                             value="google"
@@ -333,11 +239,7 @@ export const AuthForm = () => {
                             name="name"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel
-                                  className={
-                                    isDarkMode ? "text-white" : "text-gray-700"
-                                  }
-                                >
+                                <FormLabel className="text-gray-700">
                                   Name
                                 </FormLabel>
                                 <FormControl>
@@ -345,11 +247,7 @@ export const AuthForm = () => {
                                     <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
                                     <Input
                                       {...field}
-                                      className={`${
-                                        isDarkMode
-                                          ? "bg-gray-700/50 border-green-600 text-white"
-                                          : "bg-white/50 border-green-300 text-gray-900"
-                                      } pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50`}
+                                      className="bg-white/50 border-green-300 text-gray-900 pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50"
                                     />
                                   </div>
                                 </FormControl>
@@ -362,11 +260,7 @@ export const AuthForm = () => {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel
-                                  className={
-                                    isDarkMode ? "text-white" : "text-gray-700"
-                                  }
-                                >
+                                <FormLabel className="text-gray-700">
                                   Email
                                 </FormLabel>
                                 <FormControl>
@@ -374,11 +268,7 @@ export const AuthForm = () => {
                                     <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
                                     <Input
                                       {...field}
-                                      className={`${
-                                        isDarkMode
-                                          ? "bg-gray-700/50 border-green-600 text-white"
-                                          : "bg-white/50 border-green-300 text-gray-900"
-                                      } pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50`}
+                                      className="bg-white/50 border-green-300 text-gray-900 pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50"
                                     />
                                   </div>
                                 </FormControl>
@@ -391,11 +281,7 @@ export const AuthForm = () => {
                             name="password"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel
-                                  className={
-                                    isDarkMode ? "text-white" : "text-gray-700"
-                                  }
-                                >
+                                <FormLabel className="text-gray-700">
                                   Password
                                 </FormLabel>
                                 <FormControl>
@@ -404,11 +290,7 @@ export const AuthForm = () => {
                                     <Input
                                       {...field}
                                       type="password"
-                                      className={`${
-                                        isDarkMode
-                                          ? "bg-gray-700/50 border-green-600 text-white"
-                                          : "bg-white/50 border-green-300 text-gray-900"
-                                      } pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50`}
+                                      className="bg-white/50 border-green-300 text-gray-900 pl-10 focus:border-green-400 focus:ring focus:ring-green-300 focus:ring-opacity-50"
                                       onChange={(e) => {
                                         field.onChange(e);
                                         checkPasswordStrength(e.target.value);
@@ -427,11 +309,7 @@ export const AuthForm = () => {
                                 style={{ width: `${passwordStrength}%` }}
                               ></div>
                             </div>
-                            <p
-                              className={`text-sm mt-1 ${
-                                isDarkMode ? "text-gray-300" : "text-gray-600"
-                              }`}
-                            >
+                            <p className="text-sm mt-1 text-gray-600">
                               Password strength: {passwordStrength}%
                             </p>
                           </div>
@@ -456,11 +334,7 @@ export const AuthForm = () => {
                           <Button
                             disabled={isPending}
                             type="submit"
-                            className={`w-full ${
-                              isDarkMode
-                                ? "bg-green-500 hover:bg-green-600"
-                                : "bg-green-600 hover:bg-green-700"
-                            } text-white transition-all duration-300 transform hover:scale-105`}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white transition-all duration-300 transform hover:scale-105"
                           >
                             Sign up
                           </Button>
@@ -473,41 +347,25 @@ export const AuthForm = () => {
 
               {/* Social Proof */}
               <div className="mt-8 text-center">
-                <p
-                  className={`text-sm ${
-                    isDarkMode ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
+                <p className="text-sm text-gray-600">
                   Join over 100,000 fitness enthusiasts!
                 </p>
               </div>
 
               {/* Terms and Privacy Policy */}
               <div className="mt-6 text-center">
-                <p
-                  className={`text-xs ${
-                    isDarkMode ? "text-gray-400" : "text-gray-500"
-                  }`}
-                >
+                <p className="text-xs text-gray-500">
                   By signing up, you agree to our{" "}
                   <a
                     href="#"
-                    className={`underline ${
-                      isDarkMode
-                        ? "text-green-400 hover:text-green-300"
-                        : "text-green-600 hover:text-green-700"
-                    }`}
+                    className="underline text-green-600 hover:text-green-700"
                   >
                     Terms of Service
                   </a>{" "}
                   and{" "}
                   <a
                     href="#"
-                    className={`underline ${
-                      isDarkMode
-                        ? "text-green-400 hover:text-green-300"
-                        : "text-green-600 hover:text-green-700"
-                    }`}
+                    className="underline text-green-600 hover:text-green-700"
                   >
                     Privacy Policy
                   </a>
