@@ -1,28 +1,41 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   FaDumbbell,
   FaHeartbeat,
   FaRunning,
   FaBolt,
-  FaFire,
+  FaAppleAlt,
   FaCalculator,
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
+import Link from "next/link";
 
 const HeroSection = () => {
   const { data: session } = useSession();
-  const [bmiVisible, setBmiVisible] = useState(false);
-  const [bmi, setBmi] = useState<string | null>(null);
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
+  const [bmi, setBmi] = useState<number | null>(null);
+  const [height, setHeight] = useState(170);
+  const [weight, setWeight] = useState(70);
   const [dailyQuote, setDailyQuote] = useState("");
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -39,72 +52,37 @@ const HeroSection = () => {
   }, []);
 
   const calculateBMI = () => {
-    if (height && weight) {
-      const heightInMeters = Number(height) / 100;
-      const bmiValue = (
-        Number(weight) /
-        (heightInMeters * heightInMeters)
-      ).toFixed(1);
-      setBmi(bmiValue);
-    }
+    const heightInMeters = height / 100;
+    const bmiValue = Number(
+      (weight / (heightInMeters * heightInMeters)).toFixed(1)
+    );
+    setBmi(bmiValue);
   };
 
-  const getBMICategory = (bmiValue: string | null) => {
+  const getBMICategory = (bmiValue: number | null) => {
     if (!bmiValue) return "Unknown";
-    const bmi = parseFloat(bmiValue);
-    if (bmi < 18.5) return "Underweight";
-    if (bmi < 25) return "Normal weight";
-    if (bmi < 30) return "Overweight";
+    if (bmiValue < 18.5) return "Underweight";
+    if (bmiValue < 25) return "Normal weight";
+    if (bmiValue < 30) return "Overweight";
     return "Obese";
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gray-900">
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute inset-0 bg-black opacity-70"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ duration: 1 }}
-        />
-        <motion.img
-          src="/fitness-bg-advanced.jpg"
-          alt="Fitness Background"
-          className="object-cover w-full h-full"
-          initial={{ scale: 1.2, rotate: -5 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 30, repeat: Infinity, repeatType: "reverse" }}
-        />
-      </div>
-
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-white px-4 py-20">
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full pointer-events-none"
-          initial={{ backgroundPosition: "0% 50%" }}
-          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-          transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(75,0,130,0.1) 50%, rgba(0,0,0,0) 100%)",
-            backgroundSize: "200% 100%",
-          }}
-        />
-
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-20">
         <motion.h1
-          className="text-4xl sm:text-6xl md:text-8xl font-extrabold mb-6 text-center"
+          className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-            {session?.user?.name
-              ? `Welcome, ${session.user.name}!`
-              : "Elevate Your Fitness"}
-          </span>
+          {session?.user?.name
+            ? `Welcome, ${session.user.name}!`
+            : "Elevate Your Fitness"}
         </motion.h1>
 
         <motion.p
-          className="text-xl sm:text-2xl md:text-3xl mb-10 text-center max-w-3xl text-gray-300"
+          className="text-xl sm:text-2xl mb-10 text-center max-w-3xl mx-auto text-gray-600 dark:text-gray-300"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -114,7 +92,7 @@ const HeroSection = () => {
         </motion.p>
 
         <motion.div
-          className="text-lg sm:text-xl md:text-2xl mb-10 text-center max-w-2xl text-purple-300 italic"
+          className="text-lg sm:text-xl mb-10 text-center max-w-2xl mx-auto text-gray-500 dark:text-gray-400 italic"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -123,114 +101,195 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 mb-10"
+          className="mb-20"
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white text-xl px-10 py-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-          >
-            Begin Your Transformation
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="text-black border-purple-500 hover:bg-purple-500 hover:text-white text-xl px-10 py-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-            onClick={() => setBmiVisible(!bmiVisible)}
-          >
-            <FaCalculator className="mr-2" /> BMI Calculator
-          </Button>
-        </motion.div>
-
-        <AnimatePresence>
-          {bmiVisible && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-full max-w-md mb-10"
-            >
-              <Card className="bg-gray-800 border-purple-500 border shadow-xl">
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-4 text-center text-purple-400">
-                    BMI Calculator
-                  </h3>
+          <Tabs defaultValue="bmi" className="w-full max-w-4xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="bmi">BMI Calculator</TabsTrigger>
+              <TabsTrigger value="start">Get Started</TabsTrigger>
+              <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+            </TabsList>
+            <TabsContent value="bmi">
+              <Card>
+                <CardContent className="pt-6">
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="height" className="text-gray-300">
-                        Height (cm)
-                      </Label>
-                      <Input
+                      <Label htmlFor="height">Height (cm)</Label>
+                      <Slider
                         id="height"
-                        type="number"
-                        value={height}
-                        onChange={(e) => setHeight(e.target.value)}
-                        className="bg-gray-700 text-white border-gray-600 focus:border-purple-500"
+                        min={100}
+                        max={250}
+                        step={1}
+                        value={[height]}
+                        onValueChange={(value) => setHeight(value[0])}
                       />
+                      <p className="text-right text-sm text-gray-500">
+                        {height} cm
+                      </p>
                     </div>
                     <div>
-                      <Label htmlFor="weight" className="text-gray-300">
-                        Weight (kg)
-                      </Label>
-                      <Input
+                      <Label htmlFor="weight">Weight (kg)</Label>
+                      <Slider
                         id="weight"
-                        type="number"
-                        value={weight}
-                        onChange={(e) => setWeight(e.target.value)}
-                        className="bg-gray-700 text-white border-gray-600 focus:border-purple-500"
+                        min={30}
+                        max={200}
+                        step={0.1}
+                        value={[weight]}
+                        onValueChange={(value) => setWeight(value[0])}
                       />
+                      <p className="text-right text-sm text-gray-500">
+                        {weight} kg
+                      </p>
                     </div>
-                    <Button
-                      onClick={calculateBMI}
-                      className="w-full bg-purple-500 hover:bg-purple-600 text-white"
-                    >
+                    <Button onClick={calculateBMI} className="w-full">
                       Calculate BMI
                     </Button>
-                    {bmi && (
-                      <div className="text-center">
-                        <p className="text-2xl font-bold text-purple-400">
-                          Your BMI: {bmi}
-                        </p>
-                        <p className="text-gray-300">
+                    {bmi !== null && (
+                      <div className="text-center mt-4">
+                        <p className="text-2xl font-bold">Your BMI: {bmi}</p>
+                        <p className="text-gray-600 dark:text-gray-300">
                           Category: {getBMICategory(bmi)}
                         </p>
+                        <Progress value={bmi} max={40} className="mt-2" />
                       </div>
                     )}
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </TabsContent>
+            <TabsContent value="start">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Begin Your Fitness Journey</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Button className="w-full">Schedule a Free Trial</Button>
+                    <Button variant="outline" className="w-full">
+                      Take a Virtual Tour
+                    </Button>
+                  </div>
+                  <div className="mt-6">
+                    <Label htmlFor="email">Get Our Newsletter</Label>
+                    <div className="flex mt-2">
+                      <Input
+                        id="email"
+                        placeholder="Enter your email"
+                        className="mr-2"
+                      />
+                      <Button>Subscribe</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="testimonials">
+              <Card>
+                <CardHeader>
+                  <CardTitle>What Our Members Say</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Carousel className="w-full max-w-xs mx-auto">
+                    <CarouselContent>
+                      {[
+                        {
+                          name: "John D.",
+                          quote:
+                            "FitnessFusion changed my life! I've never felt better.",
+                          avatar: "/avatars/john.jpg",
+                        },
+                        {
+                          name: "Sarah M.",
+                          quote:
+                            "The trainers here are top-notch. Highly recommended!",
+                          avatar: "/avatars/sarah.jpg",
+                        },
+                        {
+                          name: "Mike R.",
+                          quote:
+                            "Great community and amazing results. Love it!",
+                          avatar: "/avatars/mike.jpg",
+                        },
+                      ].map((testimonial, index) => (
+                        <CarouselItem key={index}>
+                          <div className="p-4">
+                            <Avatar className="w-20 h-20 mx-auto mb-4">
+                              <AvatarImage
+                                src={testimonial.avatar}
+                                alt={testimonial.name}
+                              />
+                              <AvatarFallback>
+                                {testimonial.name[0]}
+                              </AvatarFallback>
+                            </Avatar>
+                            <p className="text-center italic mb-2">
+                              "{testimonial.quote}"
+                            </p>
+                            <p className="text-center font-semibold">
+                              {testimonial.name}
+                            </p>
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </Carousel>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
 
         <motion.div
           ref={ref}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mt-20"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
           initial={{ y: 50, opacity: 0 }}
           animate={inView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           {[
-            { icon: FaDumbbell, label: "Expert Trainers" },
+            {
+              icon: FaDumbbell,
+              label: "Expert Trainers",
+              link: "/expert-trainers",
+            },
             { icon: FaHeartbeat, label: "Personalized Plans" },
-            { icon: FaRunning, label: "State-of-the-art Equipment" },
+            {
+              icon: FaRunning,
+              label: "State-of-the-art Equipment",
+              link: "/equipment",
+            },
             { icon: FaBolt, label: "High-Intensity Workouts" },
-            { icon: FaFire, label: "Nutrition Guidance" },
+            {
+              icon: FaAppleAlt,
+              label: "Nutrition Guidance",
+              link: "/nutrition",
+            },
+            { icon: FaCalculator, label: "Progress Tracking" },
           ].map((item, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Card className="bg-gray-800 border-purple-500 border shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                <CardContent className="flex flex-col items-center p-6 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                  <item.icon className="text-5xl mb-4 text-purple-400 group-hover:text-pink-400 transition-colors duration-300" />
-                  <p className="text-lg font-semibold text-gray-200 group-hover:text-white transition-colors duration-300 text-center">
+              <Card>
+                <CardContent className="flex flex-col items-center p-6">
+                  <item.icon className="text-4xl mb-4 text-blue-500" />
+                  <p className="text-lg font-semibold text-center">
                     {item.label}
+                    <br />
+                    {item.link && (
+                      <Link
+                        href={item.link}
+                        className="text-blue-500 hover:text-blue-600"
+                      >
+                        Learn More
+                      </Link>
+                    )}
                   </p>
                 </CardContent>
               </Card>

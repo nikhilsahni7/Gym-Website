@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
 import Logout from "@/components/Logout";
+import { useRouter } from "next/navigation";
 import {
   FaBars,
   FaHome,
@@ -27,17 +29,21 @@ import {
   FaCreditCard,
   FaChartLine,
   FaTrophy,
-  FaSearch,
-  FaBell,
-  FaSignOutAlt,
   FaHeart,
   FaRunning,
+  FaSun,
+  FaMoon,
 } from "react-icons/fa";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => setMounted(true), []);
 
   const menuItems = [
     { icon: FaHome, label: "Dashboard" },
@@ -55,23 +61,25 @@ const Sidebar = () => {
     item.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  if (!mounted) return null;
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant="outline"
           size="icon"
-          className="fixed top-4 left-4 z-50 bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
+          className="fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <FaBars className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="w-[300px] sm:w-[400px] bg-gray-900 text-white border-r border-gray-800"
+        className="w-[300px] sm:w-[400px] bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-r border-gray-200 dark:border-gray-800"
       >
         <SheetHeader>
-          <SheetTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
+          <SheetTitle className="text-4xl font-bold text-gray-800 dark:text-white">
             FitnessFusion
           </SheetTitle>
         </SheetHeader>
@@ -82,25 +90,30 @@ const Sidebar = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Avatar className="w-32 h-32 border-4 border-green-500">
+              <Avatar className="w-32 h-32 border-4 border-blue-500">
                 <AvatarImage
                   src={session?.user?.image || "/default-avatar.png"}
                   alt="User"
                 />
-                <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-green-400 to-blue-500">
+                <AvatarFallback className="text-4xl font-bold bg-blue-500 text-white">
                   {session?.user?.name?.[0] || "U"}
                 </AvatarFallback>
               </Avatar>
             </motion.div>
-            <h2 className="mt-4 text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+            <h2 className="mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
               {session?.user?.name || "Guest"}
             </h2>
-            <p className="text-sm text-gray-400">Elite Member</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Elite Member
+            </p>
             <div className="w-full mt-4 px-4">
-              <p className="text-sm text-gray-400 mb-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                 Fitness Goal Progress
               </p>
-              <Progress value={75} className="h-2 bg-gray-700" />
+              <Progress
+                value={75}
+                className="h-2 bg-gray-200 dark:bg-gray-700"
+              />
             </div>
           </div>
 
@@ -110,7 +123,7 @@ const Sidebar = () => {
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-gray-800 border-gray-700 text-white"
+              className="bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
             />
           </div>
 
@@ -126,15 +139,17 @@ const Sidebar = () => {
                 >
                   <Button
                     variant="ghost"
-                    className="w-full justify-start text-lg mb-2 hover:bg-gray-800 text-gray-300 hover:text-white transition-all duration-200 group"
+                    className="w-full justify-start text-lg mb-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-200 group"
                     onClick={() => {
                       if (item.label === "Membership") {
                         console.log("Navigating to payment gateway");
                       }
-                      // Add navigation logic for other menu items
+                      if (item.label === "Nutrition & Diet") {
+                        router.push("/nutrition");
+                      }
                     }}
                   >
-                    <item.icon className="mr-4 h-5 w-5 group-hover:text-green-400 transition-colors duration-200" />
+                    <item.icon className="mr-4 h-5 w-5 group-hover:text-blue-500 transition-colors duration-200" />
                     <span className="group-hover:translate-x-1 transition-transform duration-200">
                       {item.label}
                     </span>
@@ -145,27 +160,49 @@ const Sidebar = () => {
           </nav>
 
           <div className="mt-8 px-4">
-            <h3 className="text-lg font-semibold mb-2">Quick Stats</h3>
+            <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">
+              Quick Stats
+            </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-800 p-3 rounded-lg">
+              <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
                 <FaHeart className="text-red-500 mb-1" />
-                <p className="text-sm">Heart Rate</p>
-                <p className="text-lg font-bold">72 bpm</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Heart Rate
+                </p>
+                <p className="text-lg font-bold text-gray-800 dark:text-white">
+                  72 bpm
+                </p>
               </div>
-              <div className="bg-gray-800 p-3 rounded-lg">
+              <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
                 <FaRunning className="text-blue-500 mb-1" />
-                <p className="text-sm">Steps Today</p>
-                <p className="text-lg font-bold">8,456</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Steps Today
+                </p>
+                <p className="text-lg font-bold text-gray-800 dark:text-white">
+                  8,456
+                </p>
               </div>
             </div>
           </div>
 
           <div className="mt-8 px-4">
             <Button
-              variant="outline"
-              className="w-full justify-center text-lg mb-4 bg-green-600 hover:bg-green-700 text-white border-none"
+              variant="default"
+              className="w-full justify-center text-lg mb-4 bg-blue-600 hover:bg-blue-700 text-white"
             >
               <FaDumbbell className="mr-2" /> Quick Start Workout
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full justify-center text-lg mb-4"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <FaSun className="mr-2" />
+              ) : (
+                <FaMoon className="mr-2" />
+              )}
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
             </Button>
             <Logout />
           </div>

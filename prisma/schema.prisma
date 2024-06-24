@@ -53,6 +53,8 @@ model User {
   password      String? @map("password")
   accounts      Account[]
   sessions      Session[]
+  consultations Consultation[]
+
  
   @@map("users")
 }
@@ -64,4 +66,19 @@ model VerificationToken {
  
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+
+
+
+model Consultation {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String?
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("consultations")
 }

@@ -1,3 +1,5 @@
+import { hostname } from "os";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -18,6 +20,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.pravatar.cc/150?img=5",
+      },
+      {
+        protocol: "https",
+        hostname: "www.shutterstock.com",
       },
     ],
   },

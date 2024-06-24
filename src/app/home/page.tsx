@@ -1,10 +1,9 @@
-import Logout from "@/components/Logout";
 import React from "react";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import Sidebar from "@/components/Sidebar";
 import HeroSection from "@/components/HeroSection";
+import Layout from "@/components/layout";
 
 const Home = async () => {
   const session = await auth();
@@ -14,8 +13,10 @@ const Home = async () => {
   }
   return (
     <div>
-      <Sidebar />
-      <HeroSection />
+      <Layout>
+        <Sidebar />
+        <HeroSection />
+      </Layout>
     </div>
   );
 };
