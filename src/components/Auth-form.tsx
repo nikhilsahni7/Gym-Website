@@ -86,14 +86,14 @@ export const AuthForm = () => {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-green-50 to-green-100">
       <div className="w-full max-w-md relative">
         <motion.div
-          className="absolute -top-24 left-1/2 transform -translate-x-1/2 flex space-x-4"
+          className="absolute -top-16 sm:-top-24 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <FaDumbbell className="text-5xl text-green-600" />
-          <FaRunning className="text-5xl text-gray-800" />
-          <FaHeartbeat className="text-5xl text-green-600" />
+          <FaDumbbell className="text-4xl sm:text-5xl text-green-600" />
+          <FaRunning className="text-4xl sm:text-5xl text-gray-800" />
+          <FaHeartbeat className="text-4xl sm:text-5xl text-green-600" />
         </motion.div>
 
         <motion.div
@@ -102,24 +102,24 @@ export const AuthForm = () => {
           transition={{ duration: 0.5 }}
         >
           <Card className="w-full backdrop-filter backdrop-blur-lg bg-opacity-30 shadow-2xl border overflow-hidden bg-white/50 border-green-200">
-            <CardHeader className="space-y-1 bg-gradient-to-r from-green-400 to-green-500 p-6">
-              <CardTitle className="text-3xl font-bold text-center text-white">
+            <CardHeader className="space-y-1 bg-gradient-to-r from-green-400 to-green-500 p-4 sm:p-6">
+              <CardTitle className="text-2xl sm:text-3xl font-bold text-center text-white">
                 FitnessFusion
               </CardTitle>
               <CardDescription className="text-center text-green-100">
                 Elevate Your Fitness Journey
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <Tabs
                 defaultValue="login"
                 className="w-full"
                 onValueChange={setActiveTab}
               >
-                <TabsList className="grid w-full grid-cols-2 mb-8">
+                <TabsList className="grid w-full grid-cols-2 mb-6 sm:mb-8">
                   <TabsTrigger
                     value="login"
-                    className={`text-lg transition-all duration-300 ${
+                    className={`text-base sm:text-lg transition-all duration-300 ${
                       activeTab === "login"
                         ? "bg-green-600 text-white"
                         : "bg-gray-200 text-gray-700"
@@ -129,7 +129,7 @@ export const AuthForm = () => {
                   </TabsTrigger>
                   <TabsTrigger
                     value="register"
-                    className={`text-lg transition-all duration-300 ${
+                    className={`text-base sm:text-lg transition-all duration-300 ${
                       activeTab === "register"
                         ? "bg-green-600 text-white"
                         : "bg-gray-200 text-gray-700"
@@ -150,7 +150,7 @@ export const AuthForm = () => {
                       <Form {...loginForm}>
                         <form
                           onSubmit={loginForm.handleSubmit(onLoginSubmit)}
-                          className="space-y-6"
+                          className="space-y-4 sm:space-y-6"
                         >
                           <FormField
                             control={loginForm.control}
@@ -213,11 +213,11 @@ export const AuthForm = () => {
                           </Button>
                         </form>
                       </Form>
-                      <div className="mt-6">
+                      <div className="mt-4 sm:mt-6">
                         <form action={doSocialLogin}>
                           <Button
                             variant="outline"
-                            className="w-full flex items-center justify-center transition-all duration-300 transform hover:scale-105 text-gray-800 border-green-600"
+                            className="w-full flex items-center justify-center transition-all duration-300 transform hover:scale-105 text-gray-800 border-green-600 dark:text-white"
                             type="submit"
                             name="action"
                             value="google"
@@ -232,7 +232,7 @@ export const AuthForm = () => {
                       <Form {...registerForm}>
                         <form
                           onSubmit={registerForm.handleSubmit(onRegisterSubmit)}
-                          className="space-y-6"
+                          className="space-y-4 sm:space-y-6"
                         >
                           <FormField
                             control={registerForm.control}
@@ -346,14 +346,14 @@ export const AuthForm = () => {
               </Tabs>
 
               {/* Social Proof */}
-              <div className="mt-8 text-center">
+              <div className="mt-6 sm:mt-8 text-center">
                 <p className="text-sm text-gray-600">
                   Join over 100,000 fitness enthusiasts!
                 </p>
               </div>
 
               {/* Terms and Privacy Policy */}
-              <div className="mt-6 text-center">
+              <div className="mt-4 sm:mt-6 text-center">
                 <p className="text-xs text-gray-500">
                   By signing up, you agree to our{" "}
                   <a
