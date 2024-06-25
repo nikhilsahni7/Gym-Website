@@ -137,7 +137,9 @@ const SchedulePage = () => {
                   <Calendar
                     mode="single"
                     selected={selectedDate}
-                    onSelect={setSelectedDate}
+                    onSelect={(day: Date | undefined) =>
+                      day && setSelectedDate(day)
+                    }
                     className="rounded-md border"
                   />
                 </CardContent>
