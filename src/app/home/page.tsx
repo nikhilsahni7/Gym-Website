@@ -12,12 +12,10 @@ const Home = async () => {
     redirect("/");
   }
   return (
-    <div>
-      <Layout>
-        <Sidebar />
-        <HeroSection />
-      </Layout>
-    </div>
+    <Layout>
+      <Sidebar />
+      <HeroSection />
+    </Layout>
   );
 };
 

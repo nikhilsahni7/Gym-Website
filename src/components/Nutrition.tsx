@@ -147,20 +147,20 @@ const NutritionPage = () => {
 
   const testimonials: testimonialsProps[] = [
     {
-      name: "Emily R.",
+      name: "Shreya Patel",
       plan: "Weight Loss",
       quote: "I've lost 20 pounds and feel more energetic than ever!",
       avatar: "/avatars/emily.jpg",
     },
     {
-      name: "Michael T.",
+      name: "Surender Mittal",
       plan: "Muscle Gain",
       quote:
         "Gained 10 pounds of lean muscle in just 3 months. Amazing results!",
       avatar: "/avatars/michael.jpg",
     },
     {
-      name: "Sophia L.",
+      name: "Ravi kumar",
       plan: "Vegetarian",
       quote:
         "This plan made transitioning to a vegetarian diet so easy and delicious.",

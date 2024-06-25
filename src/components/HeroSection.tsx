@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
+import { toast, useToast } from "./ui/use-toast";
 import {
   Carousel,
   CarouselContent,
@@ -32,6 +33,7 @@ import Link from "next/link";
 import MembershipInfo from "./MembershipInfo";
 
 const HeroSection = () => {
+  const { toast } = useToast();
   const { data: session } = useSession();
   const [bmi, setBmi] = useState<number | null>(null);
   const [height, setHeight] = useState(170);
@@ -71,7 +73,7 @@ const HeroSection = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-20">
         <motion.h1
-          className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100"
+          className="text-5xl sm:text-7xl md:text-8xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -82,35 +84,41 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-xl sm:text-2xl mb-10 text-center max-w-3xl mx-auto text-gray-600 dark:text-gray-300"
+          className="text-xl sm:text-2xl mb-12 text-center max-w-3xl mx-auto text-gray-700 dark:text-gray-300 leading-relaxed"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           Embark on a transformative journey with FitnessFusion. Redefine your
-          limits.
+          limits and achieve your health goals with our expert guidance.
         </motion.p>
 
         <motion.div
-          className="text-lg sm:text-xl mb-10 text-center max-w-2xl mx-auto text-gray-500 dark:text-gray-400 italic"
+          className="text-lg sm:text-xl mb-16 text-center max-w-2xl mx-auto text-gray-600 dark:text-gray-400 italic font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          {dailyQuote}
+          "{dailyQuote}"
         </motion.div>
 
         <motion.div
-          className="mb-20"
-          initial={{ scale: 0.5, opacity: 0 }}
+          className="mb-24"
+          initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <Tabs defaultValue="bmi" className="w-full max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="bmi">BMI Calculator</TabsTrigger>
-              <TabsTrigger value="start">Get Started</TabsTrigger>
-              <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="bmi" className="text-sm sm:text-lg">
+                BMI
+              </TabsTrigger>
+              <TabsTrigger value="start" className="text-sm sm:text-lg">
+                Start
+              </TabsTrigger>
+              <TabsTrigger value="testimonials" className="text-sm sm:text-lg">
+                Reviews
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="bmi">
               <Card>
@@ -167,8 +175,29 @@ const HeroSection = () => {
                 </CardHeader>
                 <CardContent className="pt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Button className="w-full">Schedule a Free Trial</Button>
-                    <Button variant="outline" className="w-full">
+                    <Button
+                      onClick={() => {
+                        toast({
+                          title:
+                            "Check out our membership plans for free trial",
+                          description: "Contact us to know more !",
+                        });
+                      }}
+                      className="w-full"
+                    >
+                      Schedule a Free Trial
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClickCapture={() => {
+                        toast({
+                          title: "Virtual tour feature is coming soon",
+                          description:
+                            "Subscribe and follow us we will give you early access to the virtual tour feature",
+                        });
+                      }}
+                      className="w-full"
+                    >
                       Take a Virtual Tour
                     </Button>
                   </div>
@@ -180,7 +209,16 @@ const HeroSection = () => {
                         placeholder="Enter your email"
                         className="mr-2"
                       />
-                      <Button>Subscribe</Button>
+                      <Button
+                        onClick={() => {
+                          toast({
+                            title: "Thank you for subscribing!",
+                            description: "We'll keep you updated!",
+                          });
+                        }}
+                      >
+                        Subscribe
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
@@ -196,19 +234,19 @@ const HeroSection = () => {
                     <CarouselContent>
                       {[
                         {
-                          name: "John D.",
+                          name: "Surender Mittal",
                           quote:
                             "FitnessFusion changed my life! I've never felt better.",
                           avatar: "/avatars/john.jpg",
                         },
                         {
-                          name: "Sarah M.",
+                          name: "Rahul Sharma",
                           quote:
                             "The trainers here are top-notch. Highly recommended!",
                           avatar: "/avatars/sarah.jpg",
                         },
                         {
-                          name: "Mike R.",
+                          name: "Deepshika Singh",
                           quote:
                             "Great community and amazing results. Love it!",
                           avatar: "/avatars/mike.jpg",
@@ -285,24 +323,23 @@ const HeroSection = () => {
           ].map((item, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Card>
-                <CardContent className="flex flex-col items-center p-6">
-                  <item.icon className="text-4xl mb-4 text-blue-500" />
-                  <p className="text-lg font-semibold text-center">
+              <Card className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="flex flex-col items-center p-8">
+                  <item.icon className="text-5xl mb-6 text-blue-500" />
+                  <p className="text-xl font-semibold text-center text-gray-800 dark:text-gray-200">
                     {item.label}
-                    <br />
-                    {item.link && (
-                      <Link
-                        href={item.link}
-                        className="text-blue-500 hover:text-blue-600"
-                      >
-                        Learn More
-                      </Link>
-                    )}
                   </p>
+                  {item.link && (
+                    <Link
+                      href={item.link}
+                      className="mt-4 text-blue-500 hover:text-blue-600 font-medium"
+                    >
+                      Learn More →
+                    </Link>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>

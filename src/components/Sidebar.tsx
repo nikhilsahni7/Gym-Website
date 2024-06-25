@@ -50,8 +50,6 @@ const Sidebar = () => {
     { icon: FaDumbbell, label: "Workouts" },
     { icon: FaCalendar, label: "Schedule" },
     { icon: FaAppleAlt, label: "Nutrition & Diet" },
-    { icon: FaChartLine, label: "Progress Tracker" },
-    { icon: FaTrophy, label: "Challenges" },
     { icon: FaCreditCard, label: "Membership" },
     { icon: FaUser, label: "Profile" },
     { icon: FaCog, label: "Settings" },

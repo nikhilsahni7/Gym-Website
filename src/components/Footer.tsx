@@ -71,7 +71,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      href="/workouts"
+                      href="/workout"
                       className="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                     >
                       Workouts
@@ -174,14 +174,14 @@ const Footer = () => {
                 <FaFacebook className="h-6 w-6" aria-hidden="true" />
               </a>
               <a
-                href="#"
+                href="https://x.com/Nikhilllsahni"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
               >
-                <span className="sr-only">Twitter</span>
+                <span className="sr-only">Twitter/X</span>
                 <FaTwitter className="h-6 w-6" aria-hidden="true" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/iam.nikhil7?igsh=cTFyZDh0NXk0eGNs"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
               >
                 <span className="sr-only">Instagram</span>
@@ -204,7 +204,7 @@ const Footer = () => {
                 <FaGithub className="h-6 w-6" />
               </a>
               <a
-                href="https://linkedin.com/"
+                href="https://www.linkedin.com/in/nikhil-sahni-655518222?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
