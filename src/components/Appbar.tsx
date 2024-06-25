@@ -13,6 +13,7 @@ import {
   FaUserFriends,
   FaDumbbell as FaEquipment,
   FaCalendarAlt,
+  FaAppleAlt,
   FaIdCard,
 } from "react-icons/fa";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
@@ -37,7 +38,7 @@ const AppBar = () => {
   const navItems = [
     { name: "Trainers", path: "/expert-trainers", icon: FaUserFriends },
     { name: "Equipment", path: "/equipment", icon: FaEquipment },
-    { name: "Classes", path: "/classes", icon: FaCalendarAlt },
+    { name: "Nutrition", path: "/nutrition", icon: FaAppleAlt },
     { name: "Membership", path: "/membership", icon: FaIdCard },
   ];
 
