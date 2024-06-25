@@ -12,11 +12,11 @@ import {
   FaTimes,
   FaUserFriends,
   FaDumbbell as FaEquipment,
-  FaCalendarAlt,
   FaAppleAlt,
   FaIdCard,
 } from "react-icons/fa";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
+import { CgGym } from "react-icons/cg";
 
 const AppBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +40,8 @@ const AppBar = () => {
     { name: "Equipment", path: "/equipment", icon: FaEquipment },
     { name: "Nutrition", path: "/nutrition", icon: FaAppleAlt },
     { name: "Membership", path: "/membership", icon: FaIdCard },
+    { name: "Workouts", path: "/workout", icon: CgGym },
+    { name: "Schedule/Classes", path: "/schedule", icon: FaIdCard },
   ];
 
   const variants = {

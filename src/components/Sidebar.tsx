@@ -147,6 +147,13 @@ const Sidebar = () => {
                       if (item.label === "Nutrition & Diet") {
                         router.push("/nutrition");
                       }
+
+                      if (item.label === "Workouts") {
+                        router.push("/workout");
+                      }
+                      if (item.label === "Schedule") {
+                        router.push("/schedule");
+                      }
                     }}
                   >
                     <item.icon className="mr-4 h-5 w-5 group-hover:text-blue-500 transition-colors duration-200" />

@@ -267,13 +267,21 @@ const HeroSection = () => {
               label: "State-of-the-art Equipment",
               link: "/equipment",
             },
-            { icon: FaBolt, label: "High-Intensity Workouts" },
+            {
+              icon: FaBolt,
+              label: "High-Intensity Workouts",
+              link: "/workout",
+            },
             {
               icon: FaAppleAlt,
               label: "Nutrition Guidance",
               link: "/nutrition",
             },
-            { icon: FaCalculator, label: "Progress Tracking" },
+            {
+              icon: FaCalculator,
+              label: "Schedule and Classes",
+              link: "/schedule",
+            },
           ].map((item, index) => (
             <motion.div
               key={index}
