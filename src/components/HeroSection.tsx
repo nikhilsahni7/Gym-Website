@@ -29,7 +29,6 @@ import {
 import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
-import MembershipsPage from "./Membership";
 import MembershipInfo from "./MembershipInfo";
 
 const HeroSection = () => {
@@ -258,7 +257,11 @@ const HeroSection = () => {
               label: "Expert Trainers",
               link: "/expert-trainers",
             },
-            { icon: FaHeartbeat, label: "Personalized Plans" },
+            {
+              icon: FaHeartbeat,
+              label: "Personalized Plans",
+              link: "/membership",
+            },
             {
               icon: FaRunning,
               label: "State-of-the-art Equipment",

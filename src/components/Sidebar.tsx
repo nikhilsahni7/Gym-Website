@@ -142,7 +142,7 @@ const Sidebar = () => {
                     className="w-full justify-start text-lg mb-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-200 group"
                     onClick={() => {
                       if (item.label === "Membership") {
-                        console.log("Navigating to payment gateway");
+                        router.push("/membership");
                       }
                       if (item.label === "Nutrition & Diet") {
                         router.push("/nutrition");

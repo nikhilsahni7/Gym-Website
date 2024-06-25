@@ -45,6 +45,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { IconType } from "react-icons";
+import MembershipInfo from "./MembershipInfo";
 
 const NutritionPage = () => {
   const { toast } = useToast();
@@ -607,8 +608,11 @@ const NutritionPage = () => {
             Join thousands of satisfied clients who have achieved their health
             and fitness goals with our personalized nutrition plans.
           </p>
-          <Button size="lg">Contact and join us</Button>
+          <Button variant="outline" size="lg">
+            Contact and join us
+          </Button>
         </motion.div>
+        <MembershipInfo />
       </div>
     </div>
   );
