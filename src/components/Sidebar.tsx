@@ -154,6 +154,9 @@ const Sidebar = () => {
                       if (item.label === "Schedule") {
                         router.push("/schedule");
                       }
+                      if (item.label === "Dashboard") {
+                        router.push("/dashboard");
+                      }
                     }}
                   >
                     <item.icon className="mr-4 h-5 w-5 group-hover:text-blue-500 transition-colors duration-200" />
