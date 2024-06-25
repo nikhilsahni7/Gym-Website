@@ -31,8 +31,7 @@ const EquipmentPage = () => {
     {
       name: "TechnoGym SKILLRUN",
       category: "Cardio",
-      description:
-        "Advanced treadmill with performance monitoring and virtual training programs.",
+      description: "Advanced treadmill for HIIT and cardio workouts.",
       image: "/equipment/treadmill.jpg",
       features: [
         "Speed range: 0.5 to 30 km/h",
@@ -41,8 +40,8 @@ const EquipmentPage = () => {
         "Integrated heart rate monitoring",
       ],
       workouts: [
-        "High-Intensity Interval Training (HIIT)",
-        "Endurance runs",
+        "HIIT Blast",
+        "Evening Cardio",
         "Sprint training",
         "Uphill power walking",
       ],
@@ -53,7 +52,175 @@ const EquipmentPage = () => {
         "Professional inspection annually",
       ],
     },
-    // more equipment with similar detailed information
+    {
+      name: "Concept2 RowErg",
+      category: "Cardio",
+      description: "High-quality rowing machine for full-body workouts.",
+      image: "/equipment/rower.jpg",
+      features: [
+        "Air resistance flywheel",
+        "Adjustable damper settings",
+        "PM5 performance monitor",
+        "Ergonomic handle design",
+      ],
+      workouts: [
+        "HIIT Blast",
+        "Evening Cardio",
+        "Endurance rowing",
+        "Power strokes",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Oil the chain weekly",
+        "Clean the flywheel monthly",
+        "Check for loose bolts quarterly",
+      ],
+    },
+    {
+      name: "Life Fitness Signature Series Squat Rack",
+      category: "Strength",
+      description: "Professional-grade squat rack for heavy lifting.",
+      image: "/equipment/squat-rack.jpg",
+      features: [
+        "Multiple bar catch positions",
+        "Integrated weight plate storage",
+        "Pull-up bar",
+        "Safety spotter arms",
+      ],
+      workouts: [
+        "Strength Training",
+        "Advance Strength Training",
+        "Squats",
+        "Bench press",
+        "Pull-ups",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Check and tighten bolts monthly",
+        "Lubricate moving parts quarterly",
+        "Inspect welds and joints annually",
+      ],
+    },
+    {
+      name: "Manduka PRO Yoga Mat",
+      category: "Yoga",
+      description: "High-density yoga mat for comfort and stability.",
+      image: "/equipment/yoga-mat.jpg",
+      features: [
+        "6mm thickness",
+        "Closed-cell surface to prevent moisture absorption",
+        "Non-slip texture",
+        "Lifetime guarantee",
+      ],
+      workouts: [
+        "Morning Yoga",
+        "Power Yoga",
+        "Pilates",
+        "Stretching exercises",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Deep clean with mild soap weekly",
+        "Air dry completely before rolling",
+        "Store away from direct sunlight",
+      ],
+    },
+    {
+      name: "Assault AirBike",
+      category: "Cardio",
+      description: "Fan bike for high-intensity cardio workouts.",
+      image: "/equipment/airbike.jpg",
+      features: [
+        "Unlimited air resistance",
+        "Full-body engagement",
+        "LCD display for performance metrics",
+        "Heavy-duty steel frame",
+      ],
+      workouts: [
+        "HIIT Blast",
+        "Evening Cardio",
+        "Tabata intervals",
+        "Endurance rides",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Check and tighten pedals weekly",
+        "Lubricate chain monthly",
+        "Inspect fan blades quarterly",
+      ],
+    },
+    {
+      name: "TRX Suspension Trainer",
+      category: "Strength",
+      description: "Versatile bodyweight training system.",
+      image: "/equipment/trx.jpg",
+      features: [
+        "Adjustable straps",
+        "Multiple anchor options",
+        "Supports up to 1400 lbs",
+        "Lightweight and portable",
+      ],
+      workouts: [
+        "Strength Training",
+        "HIIT Blast",
+        "Core workouts",
+        "Full-body resistance training",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Check for wear and tear weekly",
+        "Clean anchoring carabiners monthly",
+        "Replace if any signs of fraying or damage",
+      ],
+    },
+    {
+      name: "Eleiko IWF Weightlifting Set",
+      category: "Strength",
+      description: "Competition-grade barbell and weight plates.",
+      image: "/equipment/weightlifting-set.jpg",
+      features: [
+        "20kg men's / 15kg women's barbells",
+        "Calibrated steel plates",
+        "Precision bearings for smooth spin",
+        "IWF certified",
+      ],
+      workouts: [
+        "Strength Training",
+        "Advance Strength Training",
+        "Olympic weightlifting",
+        "Powerlifting",
+      ],
+      maintenanceTips: [
+        "Wipe down barbell and plates after use",
+        "Brush and oil barbell weekly",
+        "Store plates on weight trees",
+        "Check for loose collars before each use",
+      ],
+    },
+    {
+      name: "Balanced Body Studio Reformer",
+      category: "Pilates",
+      description: "Professional Pilates reformer for studio use.",
+      image: "/equipment/pilates-reformer.jpg",
+      features: [
+        "Smooth-gliding carriage",
+        "Adjustable springs for variable resistance",
+        "Padded footbar and headrest",
+        "Convertible to mat platform",
+      ],
+      workouts: [
+        "Pilates",
+        "Core strengthening",
+        "Flexibility training",
+        "Rehabilitation exercises",
+      ],
+      maintenanceTips: [
+        "Wipe down after each use",
+        "Check spring tension weekly",
+        "Lubricate wheels and tracks monthly",
+        "Professional inspection annually",
+      ],
+    },
   ];
 
   const containerVariants = {

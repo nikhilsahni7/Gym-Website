@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
+import { IconType } from "react-icons";
+import { FaDumbbell, FaRunning, FaPrayingHands } from "react-icons/fa";
 
 const ExpertTrainersPage = () => {
   interface TrainerItem {
@@ -23,36 +25,78 @@ const ExpertTrainersPage = () => {
     bio: string;
     avatar: string;
     certifications: string[];
-    schedule: { day: string; time: string }[];
-    testimonials: { name: string; text: string }[];
+    schedule: { name: string; time: string }[];
+    icon: IconType;
   }
   const [selectedTrainer, setSelectedTrainer] = useState<TrainerItem>();
 
   const trainers: TrainerItem[] = [
     {
-      name: "Alex Johnson",
+      name: "Aarav Patel",
+      specialty: "Yoga",
+      experience: "8+ years",
+      bio: "Aarav is a certified yoga instructor specializing in Morning Yoga and Power Yoga.",
+      avatar: "/trainers/aarav-patel.jpg",
+      certifications: ["RYT-200", "E-RYT 500"],
+      schedule: [
+        { name: "Morning Yoga", time: "6:00 AM - 7:00 AM" },
+        { name: "Power Yoga", time: "8:30PM- 9:30PM" },
+      ],
+      icon: FaPrayingHands,
+    },
+    {
+      name: "Rohit Sharma",
+      specialty: "Cardio",
+      experience: "7+ years",
+      bio: "Rohit is an energetic cardio trainer, known for his intense HIIT Blast sessions.",
+      avatar: "/trainers/rohit-sharma.jpg",
+      certifications: ["ACE-CPT", "NASM-PES"],
+      schedule: [{ name: "HIIT Blast", time: "7:30 AM - 8:30 AM" }],
+      icon: FaRunning,
+    },
+    {
+      name: "Rahul Singh",
       specialty: "Strength Training",
       experience: "10+ years",
-      bio: "Alex is a certified strength coach with a passion for helping clients achieve their fitness goals.",
-      avatar: "/trainers/alex.jpg",
-      certifications: ["NSCA-CSCS", "NASM-CPT"],
+      bio: "Rahul is a certified strength coach, offering both regular and advanced strength training sessions.",
+      avatar: "/trainers/rahul-singh.jpg",
+      certifications: ["NSCA-CSCS", "ISSA-CPT"],
       schedule: [
-        { day: "Monday", time: "6:00 AM - 2:00 PM" },
-        { day: "Wednesday", time: "9:00 AM - 5:00 PM" },
-        { day: "Friday", time: "12:00 PM - 8:00 PM" },
+        { name: "Strength Training", time: "9:00 AM - 10:00 AM" },
+        { name: "Advance Strength Training", time: "8:40PM - 9:50PM" },
       ],
-      testimonials: [
-        {
-          name: "John D.",
-          text: "Alex helped me increase my deadlift by 50lbs in just 3 months!",
-        },
-        {
-          name: "Sarah M.",
-          text: "I've never felt stronger. Alex's programs are challenging but effective.",
-        },
-      ],
+      icon: FaDumbbell,
     },
-    // more trainers with similar detailed information will be added
+    {
+      name: "Sumit Kumar",
+      specialty: "Strength Training",
+      experience: "6+ years",
+      bio: "Sumit specializes in strength training, focusing on building muscle and improving overall fitness.",
+      avatar: "/trainers/sumit-kumar.jpg",
+      certifications: ["NASM-CPT", "ACE-CPT"],
+      schedule: [{ name: "Strength Training", time: "10:00 AM - 11:30 AM" }],
+      icon: FaDumbbell,
+    },
+    {
+      name: "Priya Singh",
+      specialty: "Cardio",
+      experience: "5+ years",
+      bio: "Priya is passionate about cardio workouts and helps clients improve their endurance and stamina.",
+      avatar: "/trainers/priya-singh.jpg",
+      certifications: ["ACE-GFI", "AFAA-CGFI"],
+      schedule: [{ name: "Evening Cardio", time: "6:00PM - 7:25PM" }],
+      icon: FaRunning,
+    },
+    {
+      name: "Divya",
+      specialty: "Pilates",
+      experience: "6+ years",
+      bio: "Divya is a certified Pilates instructor, focusing on core strength and flexibility.",
+      avatar: "/trainers/divya.jpg",
+      certifications: ["PMA-CPT", "BASI Pilates"],
+      schedule: [{ name: "Pilates", time: "7:30PM - 8:30PM" }],
+      icon: FaRunning,
+    },
   ];
 
   const containerVariants = {
@@ -124,9 +168,6 @@ const ExpertTrainersPage = () => {
                         <TabsList>
                           <TabsTrigger value="about">About</TabsTrigger>
                           <TabsTrigger value="schedule">Schedule</TabsTrigger>
-                          <TabsTrigger value="testimonials">
-                            Testimonials
-                          </TabsTrigger>
                         </TabsList>
                         <TabsContent value="about">
                           <h3 className="font-semibold mb-2">Bio</h3>
@@ -141,27 +182,18 @@ const ExpertTrainersPage = () => {
                           </ul>
                         </TabsContent>
                         <TabsContent value="schedule">
-                          <h3 className="font-semibold mb-2">
-                            Weekly Schedule
-                          </h3>
+                          <h3 className="font-semibold mb-2">Class Schedule</h3>
                           <ul>
                             {trainer.schedule.map((slot, index) => (
-                              <li key={index}>
-                                {slot.day}: {slot.time}
+                              <li
+                                key={index}
+                                className="flex items-center mb-2"
+                              >
+                                <trainer.icon className="mr-2" />
+                                {slot.name}: {slot.time}
                               </li>
                             ))}
                           </ul>
-                        </TabsContent>
-                        <TabsContent value="testimonials">
-                          <h3 className="font-semibold mb-2">
-                            Client Testimonials
-                          </h3>
-                          {trainer.testimonials.map((testimonial, index) => (
-                            <div key={index} className="mb-4">
-                              <p className="italic">"{testimonial.text}"</p>
-                              <p className="text-right">- {testimonial.name}</p>
-                            </div>
-                          ))}
                         </TabsContent>
                       </Tabs>
                     </DialogContent>

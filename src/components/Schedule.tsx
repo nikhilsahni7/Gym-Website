@@ -27,8 +27,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaDumbbell, FaRunning, FaPrayingHands } from "react-icons/fa";
+import { useToast } from "./ui/use-toast";
 
 const SchedulePage = () => {
+  const { toast } = useToast();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedClass, setSelectedClass] = useState<classProps>();
 
@@ -211,7 +213,18 @@ const SchedulePage = () => {
                                   </DialogHeader>
                                   <div className="flex justify-end space-x-2 mt-4">
                                     <Button variant="outline">Cancel</Button>
-                                    <Button>Confirm Booking</Button>
+                                    <Button
+                                      onClick={() => {
+                                        toast({
+                                          title:
+                                            "You can choose our membership plans to book your classes",
+                                          description:
+                                            "Contact us for the membership plan and book your class(phone number: 99999144847)",
+                                        });
+                                      }}
+                                    >
+                                      Confirm Booking
+                                    </Button>
                                   </div>
                                 </DialogContent>
                               </Dialog>
