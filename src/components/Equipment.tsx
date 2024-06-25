@@ -80,7 +80,7 @@ const EquipmentPage = () => {
       name: "Life Fitness Signature Series Squat Rack",
       category: "Strength",
       description: "Professional-grade squat rack for heavy lifting.",
-      image: "/equipment/squat-rack.jpg",
+      image: "/equipment/squat-rack.png",
       features: [
         "Multiple bar catch positions",
         "Integrated weight plate storage",
@@ -201,7 +201,7 @@ const EquipmentPage = () => {
       name: "Balanced Body Studio Reformer",
       category: "Pilates",
       description: "Professional Pilates reformer for studio use.",
-      image: "/equipment/pilates-reformer.jpg",
+      image: "/equipment/pilates.jpg",
       features: [
         "Smooth-gliding carriage",
         "Adjustable springs for variable resistance",
@@ -273,7 +273,8 @@ const EquipmentPage = () => {
                       src={item.image}
                       alt={item.name}
                       layout="fill"
-                      objectFit="cover"
+                      objectFit="medium"
+                      objectPosition="center"
                       className="rounded-md"
                     />
                   </div>
