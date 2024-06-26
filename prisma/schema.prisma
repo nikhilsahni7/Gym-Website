@@ -54,6 +54,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   consultations Consultation[]
+  workouts      Workout[]
 
  
   @@map("users")
@@ -69,8 +70,6 @@ model VerificationToken {
 }
 
 
-
-
 model Consultation {
   id        String   @id @default(cuid())
   name      String
@@ -81,4 +80,30 @@ model Consultation {
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("consultations")
+}
+
+model Workout {
+  id        String     @id @default(cuid())
+  name      String
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  exercises Exercise[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("workouts")
+}
+
+model Exercise {
+  id        String   @id @default(cuid())
+  name      String
+  sets      Int
+  reps      Int
+  weight    Float
+  workoutId String
+  workout   Workout  @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("exercises")
 }

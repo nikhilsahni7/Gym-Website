@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Accordion,
@@ -36,7 +35,6 @@ interface Plan {
 const MembershipsPage = () => {
   const { toast } = useToast();
   const { data: session, status } = useSession();
-  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showAnnualPricing, setShowAnnualPricing] = useState(false);
   const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);

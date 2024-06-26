@@ -14,6 +14,7 @@ import {
   FaDumbbell as FaEquipment,
   FaAppleAlt,
   FaIdCard,
+  FaTrophy,
 } from "react-icons/fa";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
 import { CgGym } from "react-icons/cg";
@@ -37,11 +38,12 @@ const AppBar = () => {
 
   const navItems = [
     { name: "Trainers", path: "/expert-trainers", icon: FaUserFriends },
-    { name: "Equipment", path: "/equipment", icon: FaEquipment },
+    { name: "WorkoutPlanner", path: "/workoutPlanner", icon: FaTrophy },
     { name: "Nutrition", path: "/nutrition", icon: FaAppleAlt },
     { name: "Membership", path: "/membership", icon: FaIdCard },
     { name: "Workouts", path: "/workout", icon: CgGym },
     { name: "Schedule/Classes", path: "/schedule", icon: FaIdCard },
+    { name: "Equipment", path: "/equipment", icon: FaEquipment },
   ];
 
   const variants = {

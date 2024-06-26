@@ -31,6 +31,7 @@ import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import MembershipInfo from "./MembershipInfo";
+import Spinner from "./Spinner";
 
 const HeroSection = () => {
   const { toast } = useToast();
@@ -39,6 +40,7 @@ const HeroSection = () => {
   const [height, setHeight] = useState(170);
   const [weight, setWeight] = useState(70);
   const [dailyQuote, setDailyQuote] = useState("");
+  const [loading, setLoading] = useState(true);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -51,6 +53,12 @@ const HeroSection = () => {
       "Take care of your body. It's the only place you have to live.",
     ];
     setDailyQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const calculateBMI = () => {
@@ -68,6 +76,10 @@ const HeroSection = () => {
     if (bmiValue < 30) return "Overweight";
     return "Obese";
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">

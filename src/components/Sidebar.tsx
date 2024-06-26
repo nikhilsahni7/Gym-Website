@@ -51,6 +51,7 @@ const Sidebar = () => {
     { icon: FaCalendar, label: "Schedule" },
     { icon: FaAppleAlt, label: "Nutrition & Diet" },
     { icon: FaCreditCard, label: "Membership" },
+    { icon: FaTrophy, label: "Workout-planner" },
     { icon: FaUser, label: "Profile" },
     { icon: FaCog, label: "Settings" },
   ];
@@ -154,6 +155,9 @@ const Sidebar = () => {
                       }
                       if (item.label === "Dashboard") {
                         router.push("/dashboard");
+                      }
+                      if (item.label === "Workout-planner") {
+                        router.push("/workoutPlanner");
                       }
                     }}
                   >
