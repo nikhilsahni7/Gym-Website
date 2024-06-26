@@ -109,7 +109,7 @@ const NutritionPage = () => {
       ],
       sampleMenu: [
         { meal: "Breakfast", items: ["Protein smoothie", "Oatmeal with nuts"] },
-        { meal: "Lunch", items: ["Lean beef stir-fry", "Brown rice"] },
+        { meal: "Lunch", items: ["fish ", "Brown rice"] },
         {
           meal: "Dinner",
           items: ["Grilled chicken breast", "Sweet potato", "Broccoli"],
